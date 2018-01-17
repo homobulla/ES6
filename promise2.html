@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //promise是对象，从他可以获取异步操作的消息。
+        //Promise对象：不受外部环境影响，pending、fulfilled、rejected 三种状态
+        //状态改变具有唯一性和固定性(resolved（已定型）)，且只有两种：（1）pending -> fulfilled(成功)  (2) pending -> rejected(失败)
+        //思想、解决的痛点：将异步操作以同步的操作表达，避免嵌套回调。
+        //缺点： 无法取消中止进程  不设置回调，内部错误不会抛出  内部相当于黑盒子，无法得知内部进展
+        
+        let promise = new Promise(function(resolve,reject){
+            // ...
+
+             if(/*异步操作成功*/true){
+                resolve(value);
+             }else{
+                 reject(error);
+             }
+        })
+        //promise接受一个 函数 作为参数，函数内置两个参数 resolve/reject
+
+        //promise实例有 then 方法，then接受两个回调函数作为参数
+        promise.then(function(value){
+            //success  结果为resolved时调用   
+        },function(value){
+            //failuer  结果为rejected调用   =>非必需
+        });
+
+        function timeout(ms) {
+            return new Promise((resolve,reject) =>{
+                setTimeout(resolve,ms,'done');
+            });
+        }
+        timeout(100).then((value) => {
+            console.log(value);
+        });
+        //timeout函数返回一个promise实例，当ms秒之后，实例状态变成了resolved,
+    </script>
+</body>
+</html>
