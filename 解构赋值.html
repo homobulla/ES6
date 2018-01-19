@@ -31,6 +31,43 @@
         c // "l"
         d // "l"
         e // "o"
+
+        //用途
+        //1交换变量的值：
+        let x = 1;
+        let y = 2;
+        [x,y] = [y,x];
+
+        //2 函数返回多个值的接受
+
+        // 返回一个数组
+        function example() {
+            return [1, 2, 3];
+        }
+        let [a, b, c] = example();
+
+        // 返回一个对象
+        function example() {
+            return {
+                foo: 1,
+                bar: 2
+            };
+        }
+        let { foo, bar } = example();   
+
+        //3提取JSON数据 -->这个很有用
+        let jsonData = {
+            id: 42,
+            status: "OK",
+            data: [867, 5309]
+        };
+        let { id, status, data: number } = jsonData;
+        console.log(id, status, number); // 42, "OK", [867, 5309]
+
+        //4 输入模块的指定方法
+        const { SourceMapConsumer, SourceNode } = require("source-map");
+
+        
     </script>
 </body>
 </html>
