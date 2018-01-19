@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>string 扩展</title>
+</head>
+<body>
+    
+    <script>
+        //  1 字符的 Unicode 表示法
+        //  JavaScript 允许采用\uxxxx形式表示一个字符 
+            "\u0061"  // "a"
+            "\u{20BB7}" //告
+
+        //  2字符串的遍历接口  for...of
+            for (let codePoint of 'foo') {
+                console.log(codePoint)
+            }
+            // "f"
+            // "o"
+            // "o"
+
+        // 3 charAt返回字符串给定位置的字符  at
+
+        // 4 includes(),startsWith(),endsWith()
+        // indexOf 和includes()一样，用来确定一个字符串是否包含在另一个字符串中
+        // 这三个方法都支持第二个参数，表示开始搜索的位置。
+        let s = 'Hello world!';
+        s.startsWith('Hello') // true
+        s.endsWith('!') // true
+        s.includes('o') // true
+
+        // 5 模板字符串
+        // 增强版的字符串，用反引号（`）标识
+        $('#result').append(`
+            There are <b>${basket.count}</b> items
+            in your basket, <em>${basket.onSale}</em>
+            are on sale!
+        `);
+
+        // 大括号内部可以放入任意的 JavaScript 表达式，可以进行运算，以及引用对象属性。
+        let x = 1;
+        let y = 2;
+
+        `${x} + ${y} = ${x + y}`
+        // "1 + 2 = 3"
+
+        `${x} + ${y * 2} = ${x + y * 2}`
+        // "1 + 4 = 5"
+
+        let obj = {x: 1, y: 2};
+        `${obj.x + obj.y}`
+        // "3"
+        
+        // 调用函数
+        function fn() {
+            return "Hello World";
+        }
+
+        `foo ${fn()} bar`
+        // foo Hello World bar
+
+        // 写法一
+        let str = 'return ' + '`Hello ${name}!`';
+        let func = new Function('name', str);
+        func('Jack') // "Hello Jack!"
+
+        // 写法二
+        let str = '(name) => `Hello ${name}!`';
+        let func = eval.call(null, str);
+        func('Jack') // "Hello Jack!"
+    </script>
+</body>
+</html>
