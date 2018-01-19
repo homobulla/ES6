@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //let 和const 的块级作用域
+        //1.for循环中var的使用，IIFE的使用 成为过去
+        //2.没有变量提升，所以不支持先使用后命名 
+        //3.块级作用域内部变量外部无法访问，在块级作用域内部不使用函数申明而使用函数表达式
+        //4.内层作用域可以定义外层作用域的同名变量
+        //5.暂时性死区
+        var tmp = 123;
+        if (true) {
+            tmp = 'abc'; // ReferenceError   let申明会把变量tmp锁死在块级作用域里，无法去外部获取变量
+            let tmp;
+        }
+        //const 的本质：她的不得改动指的是变量指向的那个 内存地址 不得改动。
+        //对原始值而言，值就保存在变量指向的那个内存地址，因此等同于常量。
+        //对于引用值，变量保存的内存地址只是一个地址，存在堆。
+        //所以const保证变量不变的意思是，只能确认这个指针不变，而指针指向的数据就无法保证。
+
+        //这里讲一下原始值和引用值在计算机的存储；
+        //1、栈（stack）和堆（heap）
+
+        //stack为自动分配的内存空间，它由系统自动释放；而heap则是动态分配的内存，大小不定也不会自动释放。　　　　　　　
+
+        //2、基本类型和引用类型
+
+        //基本类型：存放在栈内存中的简单数据段，数据大小确定，内存空间大小可以分配。
+
+        //5种基本数据类型有Undefined、Null、Boolean、Number 和 String，它们是直接按值存放的，所以可以直接访问。
+
+        //引用类型：存放在堆内存中的对象，变量实际保存的是一个指针，这个指针指向另一个位置。每个空间大小不一样，要根据情况开进行特定的分配。
+
+        //当我们需要访问引用类型（如对象，数组，函数等）的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据。
+
+            const foo = {};
+
+            // 为 foo 添加一个属性，可以成功
+            foo.prop = 123;
+            foo.prop // 123
+
+            // 将 foo 指向另一个对象，就会报错
+            foo = {}; // TypeError: "foo" is read-only
+
+            //，如果要保证引用值的完全不变，将对象冻结，使用Object.freeze方法：
+            const foo = Object.freeze({});
+
+            //将对象彻底冻结的函数：
+            var constantize = (obj) => {
+                Object.freeze(obj);
+                Object.keys(obj).forEach( (key, i) => {
+                    if ( typeof obj[key] === 'object' ) {
+                    constantize( obj[key] );
+                    }
+                });
+            };
+
+            (typeof window !== 'undefined' ? window : (typeof process === 'object' && typeof require === 'function' && typeof global === 'object') ? global : this);
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //数组的解构赋值
+        let [a, b, c] = [1, 2, 3];
+        //模式匹配
+        let [foo, [[bar], baz]] = [1, [[2], 3]];
+
+        //等式两边的模式相同即可解构，即使只有一部分模式相同。
+
+        //允许设置默认值
+        let [foo = true] = [];
+        foo // true 
+        let [x, y = 'b'] = ['a']; // x='a', y='b'
+        let [x, y = 'b'] = ['a', undefined]; // x='a', y='b'
+
+        //对象的解构赋值
+
+        //字符串的解构赋值   --> 字符串转化为类似数组的对象
+        const [a, b, c, d, e] = 'hello';
+        a // "h"
+        b // "e"
+        c // "l"
+        d // "l"
+        e // "o"
+    </script>
+</body>
+</html>
