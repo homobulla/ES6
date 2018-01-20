@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //数值的扩展
+        // 前缀：
+        // 2进制 0b (0B)              0b111110111 === 503 // true
+        // 8进制 0o（或0O）           0o767 === 503 // true
+        Number(0b111110111) 
+
+        Number.isFinite()    //判断是否为有限的 ->非Infinity  参数类型为数值 如果不是数字类型，都返回flase
+        Number.isNaN()       // 判断是否为 NaN               参数类型为数值 如果不是数字类型，都返回flase
+
+        //parseInt(),parseFloat()全局方法放到Number上，
+        Number.parseInt() 
+        Number.parseFloat()
+
+        Number.isInteger()      //是否为整型
+        //JavaScript 内部，整数和浮点数采用的是同样的储存方法，所以 25 和 25.0 被视为同一个值。
+        Number.isInteger(25.0) // true
+
+        Math.trunc();
+        Math.trunc = Math.trunc || function(x) {
+            return x < 0 ? Math.ceil(x) : Math.floor(x);
+        };
+        2**4 //指数运算符
+    </script>
+</body>
+</html>
