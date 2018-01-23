@@ -30,9 +30,40 @@
         function fetch(url, { body = '', method = 'GET', headers = {} } = {}) {
             console.log(method);
         }
-
         fetch('http://example.com')
-// "GET"
+        // "GET"
+
+        // rest 参数，获取函数多余参数  取代arguments
+        const sortNumbers = (...numbers) => numbers.sort();    //排序
+
+        // 2 箭头函数
+        function Timer() {
+            this.s1 = 0;
+            this.s2 = 0;
+            // 箭头函数
+            setInterval(() => this.s1++, 1000);
+            // 普通函数
+            setInterval(function () {
+                this.s2++;
+            }, 1000);
+        }
+        var timer = new Timer();
+        setTimeout(() => console.log('s1: ', timer.s1), 3100);
+        setTimeout(() => console.log('s2: ', timer.s2), 3100);
+
+       //注意点
+        // （1）函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
+        // （2）不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。
+        // （3）不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
+        // （4）不可以使用yield命令，因此箭头函数不能用作 Generator 函数。
+
+        //箭头函数导致this总是指向函数定义生效时所在的对象,会将this指向固定化。
+        //this指向的固定化，并不是因为箭头函数内部有绑定this的机制，实际原因是箭头函数根本没有自己的this，导致内部的this就是外层代码块的this。正是因为它没有this，所以也就不能用作构造函数。   
+        
+        // 3. 尾调用Tail Call，函数的最后一步是调用函数
+        function x(){
+            return g();
+        };
     </script>
 </body>
 </html>
