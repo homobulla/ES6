@@ -1,4 +1,4 @@
-## 从浏览器多进程到js单线程
+# 从浏览器多进程到js单线程
 ## URL(笔记来源)： https://juejin.im/post/5a6547d0f265da3e283a1df7
 
 
@@ -37,7 +37,7 @@
 # web Worker 
 
     web worker 可以使得后台线程执行任务而不干扰页面。
-    创建worker时，JS引擎开启一个字线程，且不能操作DOM.
+    创建worker时，JS引擎开启一个子线程，且不能操作DOM.
     JS引擎线程与worker线程通过 postMessage API 方式通信。
 
 
