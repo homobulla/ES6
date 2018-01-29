@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Symbol</title>
+</head>
+<body>
+    <script>
+       let s = Symbol();      //Symbol类型通过Symbol函数生成
+                              //是一种类似字符串的数据类型 -> 原始值
+        //对象属性名有两种，字符串和symbol
+        //symbol的引入需求：当我们使用mixin模式去向一个对象添加属性或属性，很难保证不和原有的方法属性产生冲突。
+        //我们需要确保我们的方法独一无二且排他。symbol正好解决这个问题。
+
+        //symbol toString 为字符串时，都为"Symbol()",为了相互区分，可以用一个字符串作为参数加上描述。
+
+        //symbol作为属性名，不能用点语法。
+        let mySymbol = Symbol();
+        let a = {};
+        a[mySymbol] = 'Hello!';
+        Object.defineProperty(a, mySymbol, { value: 'Hello!' });  
+
+        let s = Symbol();
+
+        let obj = {
+            [s]: function (arg) {}
+        };
+        obj[s](123); 
+        // 属性名的遍历
+        //Symbol作为属性名，无法被for...in/for...of/Object.keys()/Object.getOwnPropertyNames()/JSON.stringify()
+        Object.getOwnPropertySymbols() //可以返回Symbol值
+        Reflect.ownKeys //可以返回所有键名，包括常规键名和Symbol键名
+                   
+    </script>
+</body>
+</html>
