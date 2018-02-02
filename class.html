@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    class Point {
+        constructor(x,y) {
+
+        }
+       
+        toString(){
+            console.log('tostring!')
+        }
+    };
+    // 类的所有方法都定义在类的prototype属性上面。
+    Point == Point.prototype.constructor; 
+
+    //在类的实例上面调用方法，其实就是调用原型上的方法。 
+        Object.assign(Point.prototype, { //Object.assgin 添加多个方法;
+            toString(){},
+            toValue(){}
+        });
+
+    
+    //类的内部所有定义的方法，都是不可枚举的（non-enumerable）。    
+
+
+    //类的属性名，可以采用表达式。和对象的属性名类似。
+
+    //constructor默认方法，必有。如果没有 默认添加一个
+    class Point {}
+    // 等同于
+    class Point {
+        constructor() {}
+    }
+    //表达式形式
+    var Myclass = class Me {
+        getClass() {
+            return Me.name;
+        }
+    };
+    let homo = new Myclass();
+    homo.getClass(); //Me
+
+    //立即执行class
+    let person = new class {
+    constructor(name) {
+        this.name = name;
+    }
+
+    sayName() {
+        console.log(this.name);
+    }
+    }('张三');
+    person.sayName(); // 张三
+    
+    </script>
+</body>
+</html>

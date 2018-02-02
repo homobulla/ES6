@@ -9,14 +9,14 @@
         console.log(`getting ${key}!`);
         return Reflect.get(target, key, receiver);
     },
-    set: function (target, key, value, receiver) {
+    set: function (target, key, value  receiver) {
         console.log(`setting ${key}!`);
         return Reflect.set(target, key, value, receiver);
     }
     });
      
         var person = {
-        name: "张三"
+            name: "张三"
         };
 
         var proxy = new Proxy(person, {
@@ -31,5 +31,29 @@
 
         proxy.name // "张三"
         proxy.age // 抛出一个错误
+
+        var proxy = new Proxy({}, {
+            get: function(target, property) {
+        return 35;
+        }
+        });
+
+        let obj = Object.create(proxy);
+
+        let proxy = new Proxy({},{
+            name: function(){
+                console.log(new Data())
+            }
+        });
+
+        var handler = {
+            has (target, key) {
+                if (key[0] === '_') {
+                return false;
+                }
+                return key in target;
+            }
+        };
+        
 </script>
 

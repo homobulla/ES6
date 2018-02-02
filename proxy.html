@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var demo = {
+            first: 'homo',
+            last: 'bulla',
+            
+        };
+
+        var proxy = new Proxy({},{
+            get: function(target,property) {
+                return property + '我拦截了点语法。';
+            },
+            set: function(target,property) {
+                return property + '我拦截了属性设置';
+            }
+        });
+
+        demo = Object.create(proxy);
+        demo.last;
+    </script>
+</body>
+</html>
