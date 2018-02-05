@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类的继承</title>
+</head>
+<body>
+    <script>
+        class Father {
+
+        }
+        //ES6的子类继承要先拿父类的this，然后在父类基础上修改.子类没有自己的this,所以 this.color 报错，因为此时没有 this
+        class children extends Father{
+            constructor(x,y,name) {
+                this.color = color; // ReferenceError
+                super(x,y) //super调用父类的constructor(x,y); Father.prototype.constructor.call(this);
+                this.name = name;
+            }
+
+            toString() {
+                return this.color + ' ' + super.toString(); //调用父类的方法;
+            }
+        }
+
+        Object.getPrototypeOf() //找到子类的父类
+        
+
+        //Mix in混合模式，将多个类混入一个类中。
+        function mix(...mixins) {
+
+            class Mix {}
+                for (let mixin of mixins) {
+                    copyProperties(Mix, mixin); // 拷贝实例属性
+                    copyProperties(Mix.prototype, mixin.prototype); // 拷贝原型属性
+                }
+
+                return Mix;
+        }
+
+            function copyProperties(target, source) {
+                for (let key of Reflect.ownKeys(source)) {
+                    if ( key !== "constructor"
+                        && key !== "prototype"
+                        && key !== "name"
+                    ) {
+                        let desc = Object.getOwnPropertyDescriptor(source, key);
+                        Object.defineProperty(target, key, desc);
+                    }
+                }
+            }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>class</title>
+</head>
+<body>
+    <script>
+        //constructor 方法默认返回实例对象(this),可以修改
+        class Homo {
+            constructor() {
+                return Object.create(null);
+            }
+        }
+        new Homo() instanceof Homo      //false
+
+
+        //  没有变量提升
+        //  this的指向
+        constructor() {
+            this.printName = this.printName.bind(this);
+        }
+
+        class Logger {
+            constructor() {
+                this.printName = (name = 'there') => {
+                this.print(`Hello ${name}`);
+                };
+            }
+
+            // ...
+        }
+
+        //class的取值函数(getter)和存值函数(setter);
+        class Homo {
+            constructor(a,b){
+                this.a = a;
+                this.b = b;
+            }
+
+            get prop(){
+                return `getter `;
+            }
+
+            set prop(value) {
+                console.log('setter' + 'value:' + value)
+            }
+        }
+
+        let inst = new MyClass();
+
+        inst.prop = 123;
+        // setter: 123
+
+        //class 静态方法
+        //类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”
+        class Ho {
+            static MyClass(){
+                console.log(this + '静态方法中 this 指的是类' + '我是静态方法，不会被实例继承，但会被子类继承');
+            }
+        }
+        
+    </script>
+</body>
+</html>
