@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        (function(x, f = () => x) {
+            var x;
+            var y = x;
+            x = 2;
+            return [x, y, f()];
+        })(1)
+
+        [2, 1, 1]
+
+        // 参数值的优先级大于函数体内部赋值
+        // f = () => x    
+        f = function f() {
+            return x;
+        };
+
+        (function() {
+            return [
+                (() => this.x).bind({ x: 'inner' })(),
+                (() => this.x)()
+            ]
+        }).call({ x: 'outer' }); 
+
+        // 箭头函数作用域等于定义时的作用域，bind也无法修改。
+        //this is Error of es5.
+        // function liji() {
+        //     return [
+        //         (function a(){ return this.x.bind({ x: 'inner' })})(),
+        //         (function b(){ return this.x})()
+        //     ]
+        // }
+
+        let x, { x: y = 1 } = { x }; y;
+        
+    </script>
+</body>
+</html>
