@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // ES6 新增方法 findIndex,返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1。 
+        function isBigEnough(element) {
+            return element >= 15;
+        }
+        [12, 5, 8, 130, 44].findIndex(isBigEnough);  // 3
+
+        function findIndex(array, predicate, context) {
+            for (var i = 0; i < array.length; i++) {
+
+                if (predicate.call(context, array[i], i, array)) return i;
+            }
+            return -1;
+        }
+        console.log(findIndex([1, 2, 3, 4], function(item, i, array){
+            if (item == 3) return true;
+        })) // 2
+        
+    </script>
+</body>
+</html>

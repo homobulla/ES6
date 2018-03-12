@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Find the array maximum and minimum
+  
+        function ArrMax(arr) {
+            if( !Array.isArray(arr)) {
+                return arr + ' is not an Array';
+            };
+            var result = arr[0];
+            for(var i = 0, len = arr.length; i<len; i++) {
+                result = Math.max(result,arr[i])
+            }
+            return result;
+        }
+
+        //  排序
+        function Max(arr) {
+            if(Array.isArray(arr)) {
+                srr.sort(function (a,b) {return a-b});
+                return arr[arr.length -1];
+            } else {
+                return arr + 'is not an array';
+            }
+        }
+
+        // apply  es5
+        var arr = [6, 4, 1, 8, 2, 11, 23];
+        console.log(Math.max.apply(null, arr))
+
+        // es6
+        var arr = [6, 4, 1, 8, 2, 11, 23];
+        console.log(Math.max(...arr))
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // A shallow copy of an Array.
+        // If each item is a basic type ---> concat slice  This is a shallow copy. 浅拷贝
+        // 还是引用类型储存的指针这一概念，改变原数组也会改变拷贝的数组。
+        var arr = [undefined, null, 1, 'homo'];
+        var new_arr = arr.concat();
+        var new_arr2 = arr.slice();
+
+        // If the array has nested objects or arrays  深拷贝
+        // 改变原数组也不会改变拷贝的数组。
+        var arr = ['old', 1, true, ['old1', 'old2'], {old: 1}];    //不能拷贝函数
+        var new_arr = JSON.parse( JSON.stringify(arr) );
+
+
+        // 对象或数组浅拷贝的代码实现 
+        function copy(obj) {
+            if(typeof obj !== 'object') {
+                return 
+            }
+
+            var new_obj = Array.isArray(obj) ? [] : {};
+            for(var key in obj) {
+                if(obj.hasOwnProperty(key)) {
+                    new_obj[key] = obj[key]
+                }
+            }
+
+            return new_obj;   
+        }
+
+        // 深拷贝 判断每一项key是否为对象或数组，再递归本方法
+        var deepCopy = function(obj) {
+            if (typeof obj !== 'object') return;
+            var newObj = obj instanceof Array ? [] : {};
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    if(obj[key] = null) {
+                        newObj[key] = null;
+                    }
+                    newObj[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key];
+                }
+            }
+            return newObj;
+        }
+    </script> 
+</body>
+</html>

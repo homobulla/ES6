@@ -1,3 +1,4 @@
+
 class Axios {
     constructor(options) {
         this.options = options;
@@ -5,7 +6,7 @@ class Axios {
 
     getDate(method,url,fn){
         var xhr = new XMLHttpRequest();
-        xhr.open(method.toLocaleUpperCase,url,true);
+        xhr.open(method.toLocaleUpperCase(),url,true);
         if(method == 'POST'){
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         }
@@ -19,4 +20,8 @@ class Axios {
 }
 
 var axios = new Axios();
-axios.getDate('get','www.baidu.com',function(res){console.log(res)})
+try {
+    axios.getDate('get','www.baidu.com',function(res){console.log(res)})
+}catch(e) {
+    console.log(e)
+}

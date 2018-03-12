@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container{
+            width: 100%; height: 200px; line-height: 200px; text-align: center; color: #fff; background-color: #444; font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        
+        
+        var count = 1;
+        var container = document.getElementById('container');
+        
+        function getUserAction() {
+            container.innerHTML = count++;
+        };
+        
+        //container.onmousemove = getUserAction;
+        // 频繁的事件触发
+        // 1 debounce 防抖
+        // 2 throttle 节流
+
+        // 防抖
+        function debounce(func, wait,immediate) {
+            var timeout;
+            return function () {
+                var context = this;
+                var args = arguments;
+
+                if(timeout) clearTimeout(timeout); 
+                if(immediate) {
+                    var callnow = !timeout;
+
+                    timeout = setTimeout(function () {
+                        timeout = null;
+                    }, wait)
+
+                    if (callnow) func.apply(context, args)
+                } else {
+                    timeout = setTimeout(function(){
+                        timeout = setTimeout(function() {
+                            func.apply(context,args)
+                        }, wait)
+                    })
+                }
+               
+                ;
+            }
+        }
+
+        //container.onmousemove = debounce(getUserAction, 1000, true);
+
+
+
+        // 节流
+        // case one 时间戳
+        function throttle1(func,wait) {
+            let context,args;
+            let time = 0;
+
+            return function() {
+                let now = +new Date();
+                context = this;
+                args = arguments;
+
+                if(now - time > wait) {
+                    func.apply(context,args);
+                    time = now;
+                }
+            }
+        }
+
+        // case two 定时器
+        function throttle(func, wait) {
+            var timeout;
+            var previous = 0;
+
+            return function() {
+                context = this;
+                args = arguments;
+                if (!timeout) {
+                    timeout = setTimeout(function(){
+                        timeout = null;
+                        func.apply(context, args)
+                    }, wait)
+                }
+
+            }
+        }
+        container.onmousemove = throttle(getUserAction, 3000);
+    </script>
+</body>
+</html>

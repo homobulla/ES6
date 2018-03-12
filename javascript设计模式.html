@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // <-! 工厂模式 -->
+        // 大量的类似的相同的事件。
+
+        function CreatPerson(name,age,sex) {
+            var obj = new Object();
+            obj.name = name;
+            obj.age = age;
+            obj.sex = sex;
+            obj.sayHa = function () {
+                return this.name;
+            }
+            return obj;
+        }
+
+        var p1 = new CreatePerson("longen",'28','男');
+        
+    </script>
+    
+    
+</body>
+</html>

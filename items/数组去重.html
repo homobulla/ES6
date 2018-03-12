@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shuzu </title>
+</head>
+<body>
+    <script>
+        
+        // 双层for 循环
+        var arr = [1,1,2,2,3,3,4,4,5,5];
+        
+        function unique(array) {
+            // res用来存储结果
+            var res = [];
+            for (var i = 0, arrayLen = array.length; i < arrayLen; i++) {
+                for (var j = 0, resLen = res.length; j < resLen; j++ ) {
+
+                    if (array[i] === res[j]) {
+                        break;
+                    }
+                }
+                // 如果array[i]是唯一的，那么执行完循环，j等于resLen
+                if (j === resLen) {
+                    console.log(j,resLen)
+                    res.push(array[i])
+                }
+            }
+            return res;
+        }
+        
+        // indexOf
+        function unique(array) {
+            var res = [];
+            for (var i = 0, len = array.length; i < len; i++) {
+                var current = array[i];
+                if (res.indexOf(current) === -1) {
+                    res.push(current)
+                }
+            }
+            return res;
+        }
+
+        // ES5
+        function unique(array) {
+            var res = array.filter(function(item, index, array) {
+                return array.indexOf(item) === index; 
+            })
+            return res;
+        }
+
+        // ES 6
+        var unique = (array) => [...new Set(array)]
+    </script>
+</body>
+</html>

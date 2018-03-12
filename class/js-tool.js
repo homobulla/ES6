@@ -5,7 +5,7 @@
 
 'use strict';
 
-(function () {
+export default function () {
 
         var root = this,
             store,
@@ -1101,3 +1101,5 @@
 
             return objArr;
         };
+
+    }
