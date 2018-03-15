@@ -75,15 +75,34 @@
         const message = await getMessage(JSON.parse(data).data.name);
         return message
     }
+    async function SameTime() {
+        const [func1, func2] = await Promise.all([
+            getDate(),
+            getMessage(),
 
-    doDate()
-    .then(ret => {
-        var data = JSON.parse(ret);
-        alert(data.data.message)
-    })
-    .catch(e => {
-        console.log(e, 'error')
-    })
+        ])
+    }
+    SameTime()
+    // doDate()
+    // .then(ret => {
+    //     var data = JSON.parse(ret);
+    //     alert(data.data.message)
+    // })
+    // .catch(e => {
+    //     console.log(e, 'error')
+    // })
+    function fetchJson(url) {
+        return fetch(url)
+            .then(request => request.text())
+            .then(text => {
+                return JSON.parse(text);
+            })
+            .catch(error => {
+                console.log(`ERROR: ${error.stack}`);
+            });
+    }
+    fetchJson('https://www.easy-mock.com/mock/5aa732e1cbd0e55803e5e6a8/example/homo')
+        .then(obj => console.log(obj));
 </script>
 
 </html>

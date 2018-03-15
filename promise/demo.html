@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise</title>
+</head>
+
+<body>
+    <script>
+        var Ajax = {
+            get: function (url, fn) {
+                var obj = new XMLHttpRequest();
+                obj.open("GET", url, false);
+                obj.onreadystatechange = function () {
+                    if (
+                        (obj.readyState == 4 && obj.status == 200) ||
+                        obj.status == 304
+                    ) {
+
+                        fn.call(this, obj.responseText);
+                    }
+                };
+                obj.send();
+            },
+            post: function (url, data, fn) {
+
+                var obj = new XMLHttpRequest();
+                obj.open("POST", url, false);
+                obj.setRequestHeader(
+                    "Content-type",
+                    "application/x-www-form-urlencoded"
+                );
+                obj.onreadystatechange = function () {
+                    if (
+                        obj.readyState == 4 &&
+                        (obj.status == 200 || obj.status == 304)
+                    ) {
+                        fn.call(this, obj.responseText);
+                    }
+                };
+                obj.send(data);
+            }
+        };
+
+        function multiply(input) {
+            return new Promise(function (resolve, reject) {
+                console.log('calculating ' + input + ' x ' + input + '...');
+                setTimeout(resolve, 500, input * input);
+            });
+        }
+
+        function add(input) {
+            return new Promise(function (resolve, reject) {
+                console.log('calculating ' + input + ' + ' + input + '...');
+                setTimeout(resolve, 500, input + input);
+            });
+        }
+        
+        var p = new Promise(function (resolve, reject) {
+            console.log('start new Promise...');
+            resolve(123);
+        });
+
+        p.then(multiply)
+            .then(add)
+            .then(multiply)
+            .then(add)
+            .then(function (result) {
+                console.log('Got value: ' + result);
+            });
+
+        setTimeout(function(){
+            console.log(1)
+        },0)
+        new Promise(function executor(resolve){
+            console.log(2);
+            for(var i = 0;i<1000;i++) {
+                i = 9999 && resolve();
+                console.log( typeof resolve)
+            }
+            console.log(3)
+        }).then(function (){
+            console.log(4)
+            
+        })
+
+        console.log(5)
+
+        // 2 3 5 4 1
+    </script>
+</body>
+
+</html>
