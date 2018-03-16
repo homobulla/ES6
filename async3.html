@@ -57,6 +57,7 @@
                 ret = res;
             })
         )
+        console.log(new Date())
         return ret;
     }
 
@@ -67,6 +68,8 @@
             'name=' + parse,
             (ret => r = ret)
         )
+        console.log(new Date())
+        
         return r;
     }
 
@@ -82,15 +85,15 @@
 
         ])
     }
-    SameTime()
-    // doDate()
-    // .then(ret => {
-    //     var data = JSON.parse(ret);
-    //     alert(data.data.message)
-    // })
-    // .catch(e => {
-    //     console.log(e, 'error')
-    // })
+    //SameTime()
+    doDate()
+    .then(ret => {
+        var data = JSON.parse(ret);
+        alert(data.data.message)
+    })
+    .catch(e => {
+        console.log(e, 'error')
+    })
     function fetchJson(url) {
         return fetch(url)
             .then(request => request.text())
