@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        setTimeout(function () {
+            console.log(1)
+        }, 0)
+        new Promise(function executor(resolve) {
+            console.log(2);
+            for (var i = 0; i < 1000; i++) {
+                i = 9999 && resolve();
+            }
+
+            console.log(3)
+        }).then(function () {
+            console.log(4)
+        })
+        console.log(5);
+
+        // 2 3  5 4 1
+        // web work
+        var worker = new Worker('numberworker.js');
+        worker.postMessage("{first:347734080,second:3423744400}");
+        worker.onmessage = function (event) {
+            document.getElementById(' computation_result').textContent = event.data;
+        };
+
+        onmessage = function (event) {
+            var first = event.data.first;
+            var second = event.data.second;
+            calculate(first, second);
+        };
+
+        function calculate(first, second) {
+            //do the calculation work 
+            var common_divisor = divisor(first, second);
+            var common_multiple = multiple(first, second);
+            postMessage("Work done! " +
+                "The least common multiple is " + common_divisor +
+                " and the greatest common divisor is " + common_multiple);
+        }
+    </script>
+</body>
+
+</html>
