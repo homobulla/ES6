@@ -1,14 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        Array(9).fill(null)
+        reduce()
+        var s = a.reduce((prev, current) => {
+            return prev + current; // 1 + 2, 3+ 3
+        }, 10);
+        console.log(s);
+
+        var todos = [{
+            id: 1,
+            completed: true
+        }, {
+            id: 2,
+            completed: false
+        }, {
+            id: 3,
+            completed: true
+        }, {
+            id: 4,
+            completed: true
+        }, {
+            id: 5,
+            compelted: false
+        }];
+
+        const completedCount = todos.reduce((count, current) => {
+            return current.completed ? count + 1 : count
+        }, 0);
+        console.log(completedCount); // 3
+
+        const unCompleted = todos.reduce((count, current) => {
+            return !current.completed ? count + 1 : count;
+        }, 0);
+        console.log(unCompleted); // 2
+
+        var count = 0;
+        todos.map((item) => {
+            if (item.completed) {
+                count++;
+            }
+        });
+        console.log(count); // 3
+
+        filter()
+
+        var completedTodos = todos.filter((item) => {
+            return item.completed;
+        });
+
+        console.log(completedTodos);
+
+        map() 
+        some()
+        every()
     </script>
 </body>
+
 </html>
